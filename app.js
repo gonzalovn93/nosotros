@@ -81,45 +81,40 @@ async function main() {
   setText("hero-time", diffYM(g.first_message, g.last_message) + " y contando.");
   setTarget("hero-total", g.total_messages);
 
-  // 2. Inicio
+  // 2. Inicio — primer mensaje, días, horas escritas
   setText("first-date", fmtFecha(g.first_message));
   setTarget("days-talking", g.days_talking);
-  setTarget("start-total", g.total_messages);
   // tiempo estimado escribiéndonos: palabras / velocidad de tipeo en celular (~30 ppm)
   const WPM = 30;
   const horas = Math.round(g.total_words / WPM / 60 / 10) * 10;
   const dias = Math.round(g.total_words / WPM / 60 / 24);
-  setText("timespent-num", `≈ ${fmtInt(horas)} horas`);
-  setText("timespent-txt", `solo escribiéndonos: más de ${dias} días sin parar de teclear`);
+  setText("timespent-num", `≈ ${fmtInt(horas)} h`);
+  setText("timespent-txt", `escribiéndonos · más de ${dias} días tecleando`);
 
-  // 3. Versus
+  // 3. Versus — tabla de doble entrada
   const gm = g.per_person["Gonzalo"], am = g.per_person["Ana Maria"];
-  const maxm = Math.max(gm.messages, am.messages);
-  setText("g-msgs", fmtInt(gm.messages));
-  setText("a-msgs", fmtInt(am.messages));
-  const gb = document.getElementById("g-bar"), ab = document.getElementById("a-bar");
-  gb.dataset.bar = (100 * gm.messages / maxm).toFixed(1);
-  ab.dataset.bar = (100 * am.messages / maxm).toFixed(1);
-  gb.closest(".reveal").querySelectorAll(".bar > span").forEach(() => {});
-  // animar barras al revelar la sección versus
-  const versusSection = document.getElementById("s-versus");
-  new IntersectionObserver((es, o) => es.forEach((e) => {
-    if (e.isIntersecting) { gb.style.width = gb.dataset.bar + "%"; ab.style.width = ab.dataset.bar + "%"; o.disconnect(); }
-  }), { threshold: 0.3 }).observe(versusSection);
+  setText("t-g-msgs", fmtInt(gm.messages));
+  setText("t-a-msgs", fmtInt(am.messages));
+  setText("t-g-pct", gm.pct_messages + "%");
+  setText("t-a-pct", am.pct_messages + "%");
+  setText("t-g-words", fmtInt(gm.words));
+  setText("t-a-words", fmtInt(am.words));
+  setText("t-g-avg", gm.avg_words_per_msg);
+  setText("t-a-avg", am.avg_words_per_msg);
   setText("versus-note",
-    `Entre los dos, ${fmtInt(g.total_messages)} mensajes. Ana Maria escribe más largo (${am.avg_words_per_msg} palabras por mensaje vs ${gm.avg_words_per_msg}).`);
+    `Yo mando más mensajes, pero Anita escribe más largo: ${am.avg_words_per_msg} palabras por mensaje frente a ${gm.avg_words_per_msg}.`);
 
-  // 4. Racha ACTIVA + heatmap horas
-  setTarget("streak-days", g.active_streak_days);
-  const pct = Math.round(100 * g.days_talking / g.calendar_span_days);
-  setText("streak-range",
-    `Seguimos sin fallar desde el ${fmtFecha(g.active_streak_since)}. ` +
-    `Y en estos ocho años hablamos ${fmtInt(g.days_talking)} de ${fmtInt(g.calendar_span_days)} días: el ${pct}% del tiempo.`);
-  buildHeat(g.activity.by_hour_total);
+  // 4. Ritmo — facts como cuadritos + heatmap
   const weekdays = ["lunes","martes","miércoles","jueves","viernes","sábado","domingo"];
   const favDay = Object.entries(g.activity.by_weekday_total).sort((a,b)=>b[1]-a[1])[0][0];
   const favHour = Object.entries(g.activity.by_hour_total).sort((a,b)=>b[1]-a[1])[0][0];
-  setText("rhythm-note", `Nuestro día favorito para hablar es el ${weekdays[+favDay]}, y la hora pico, las ${favHour}:00.`);
+  const di = g.activity.day_initiator;
+  const rt = g.activity.response_time_seconds;
+  setText("fav-day", weekdays[+favDay]);
+  setText("fav-hour", `${favHour}:00`);
+  setText("who-starts", di["Gonzalo"] >= di["Ana Maria"] ? "Gonza" : "Anita");
+  setText("who-fast", rt["Gonzalo"].median <= rt["Ana Maria"].median ? "Gonza" : "Anita");
+  buildHeat(g.activity.by_hour_total);
 
   // 5. Amor
   const love = g.love.terms;
@@ -133,13 +128,12 @@ async function main() {
     `El primer “te amo” lo dijo ${love["te amo"].first.by} el ${fmtFecha(love["te amo"].first.when)}. ` +
     `Hoy lo decimos más de mil veces.`);
 
-  // 6. Chini
+  // 6. Chini + ranking de palabras nuestras + temas
   const chini = g.our_language.chini;
-  setTarget("chini-total", chini.total);
-  setTarget("laughs-total", g.laughs.total);
-  setText("laughs-who", g.laughs.who_more);
   setText("chini-note",
     `Así nos llamamos. Lo dijimos por primera vez ${chini.first ? "el " + fmtFecha(chini.first.when) : "hace años"} y no paramos: ${fmtInt(chini.total)} veces.`);
+  buildWordRank(chini, love);
+  buildTopics(g.topics.totals);
 
   // 7. Multimedia
   const mt = g.media_totals;
@@ -147,6 +141,13 @@ async function main() {
   setTarget("m-audios", mt.audio || 0);
   setTarget("m-stickers", mt.sticker || 0);
   setTarget("m-videos", mt.video || 0);
+
+  // Racha (cerca del final): la MÁS LARGA
+  setTarget("streak-days", g.longest_streak_days);
+  const pct = Math.round(100 * g.days_talking / g.calendar_span_days);
+  setText("streak-range",
+    `Nuestra racha más larga: del ${fmtFecha(g.longest_streak_range[0])} al ${fmtFecha(g.longest_streak_range[1])}, sin fallar un solo día. ` +
+    `Y en ocho años hablamos ${fmtInt(g.days_talking)} de ${fmtInt(g.calendar_span_days)} días — el ${pct}% del tiempo.`);
 
   // 9. Capítulos
   buildChapters(curated.chapters || []);
@@ -182,6 +183,40 @@ function buildHeat(byHour) {
     cell.title = `${h}:00 — ${fmtInt(v)} mensajes`;
     wrap.appendChild(cell);
   }
+}
+
+const SHORT = (n) => (n === "Ana Maria" ? "Anita" : "Gonza");
+
+function buildWordRank(chini, love) {
+  const rows = [{ w: "chini", total: chini.total, who: chini.who_more }];
+  Object.entries(love).forEach(([k, v]) => rows.push({ w: k, total: v.total, who: v.who_more }));
+  rows.sort((a, b) => b.total - a.total);
+  const tb = document.querySelector("#word-rank tbody");
+  rows.slice(0, 8).forEach((r, i) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td class="rk">${i + 1}</td><td class="rw">“${r.w}”</td>` +
+      `<td>${fmtInt(r.total)}</td><td class="${r.who === "Ana Maria" ? "th-a" : "th-g"}">${SHORT(r.who)}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+const TOPIC_LABEL = {
+  casa: "Casa", familia: "Familia", futuro: "Futuro", trabajo: "Trabajo",
+  viaje: "Viajes", peru: "Perú", berkeley: "Berkeley", hijos: "Hijos",
+  matrimonio: "Matrimonio", boda: "Boda",
+};
+function buildTopics(totals) {
+  const wrap = document.getElementById("topic-pills");
+  Object.entries(totals)
+    .filter(([, c]) => c >= 100)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 8)
+    .forEach(([k, c]) => {
+      const span = document.createElement("span");
+      span.className = "pill";
+      span.innerHTML = `${TOPIC_LABEL[k] || k}<b>${fmtInt(c)}</b>`;
+      wrap.appendChild(span);
+    });
 }
 
 function buildChapters(chapters) {

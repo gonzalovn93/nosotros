@@ -130,6 +130,51 @@ h2 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 0.6rem; }
 .card .k { font-size: 0.85rem; color: var(--ink-soft); margin-top: 0.3rem; }
 .card-wide { grid-column: 1 / -1; }
 .card-wide .n { font-size: 2rem; }
+/* columnas fijas para que no quede espacio vacío a la derecha */
+.grid-3 { grid-template-columns: repeat(3, 1fr); max-width: 760px; }
+.grid-4 { grid-template-columns: repeat(4, 1fr); max-width: 860px; }
+
+/* tabla comparativa "quién habla más" */
+.vtable {
+  width: 100%; max-width: 560px; margin-top: 2.2rem;
+  border-collapse: collapse; background: rgba(255,255,255,0.7);
+  border: 1px solid var(--rose-soft); border-radius: 18px; overflow: hidden;
+  box-shadow: var(--shadow); font-size: 1rem;
+}
+.vtable th, .vtable td { padding: 0.95rem 1.1rem; text-align: right; }
+.vtable thead th { font-family: var(--font-sans); font-weight: 700; font-size: 1.05rem; border-bottom: 2px solid var(--rose-soft); }
+.vtable td.metric, .vtable th:first-child { text-align: left; color: var(--ink-soft); font-weight: 500; }
+.vtable tbody tr + tr td { border-top: 1px solid var(--rose-soft); }
+.vtable tbody td:not(.metric) { font-family: var(--font-serif); font-weight: 600; color: var(--ink); }
+.th-g { color: var(--gonza); }
+.th-a { color: var(--anita); }
+
+/* títulos de sub-bloque */
+.block-title { font-family: var(--font-serif); font-weight: 600; font-size: 1.3rem; margin: 2.4rem 0 0.4rem; }
+
+/* ranking de palabras */
+.rank {
+  width: 100%; max-width: 540px; margin-top: 0.8rem; border-collapse: collapse;
+  background: rgba(255,255,255,0.7); border: 1px solid var(--rose-soft);
+  border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.98rem;
+}
+.rank th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); font-weight: 600; padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--rose-soft); }
+.rank td { padding: 0.7rem 0.9rem; text-align: left; }
+.rank tbody tr + tr td { border-top: 1px solid var(--rose-soft); }
+.rank .rk { color: var(--gold); font-weight: 700; width: 1.5rem; }
+.rank .rw { font-family: var(--font-serif); font-style: italic; }
+.rank th:nth-child(3), .rank td:nth-child(3) { text-align: right; font-family: var(--font-serif); font-weight: 600; }
+.rank th:last-child, .rank td:last-child { text-align: right; font-weight: 600; }
+
+/* pills de temas */
+.pills { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; max-width: 620px; margin-top: 0.8rem; }
+.pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(255,255,255,0.75); border: 1px solid var(--rose-soft);
+  border-radius: 999px; padding: 0.5rem 1rem; font-size: 0.95rem; color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.pill b { font-family: var(--font-serif); color: var(--coral-deep); }
 
 /* versus bars */
 .versus { width: 100%; max-width: 620px; margin-top: 2.4rem; }
@@ -194,6 +239,9 @@ h2 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 0.6rem; }
 @media (max-width: 560px) {
   .heat { grid-template-columns: repeat(12, 1fr); }
   .screen { padding: 8vh 7vw; }
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .vtable { font-size: 0.9rem; }
+  .vtable th, .vtable td { padding: 0.7rem 0.7rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; opacity: 1; transform: none; }
