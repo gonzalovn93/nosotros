@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosotros — Gonzalo & Anita</title>
+  <meta name="description" content="La historia que fuimos escribiendo sin darnos cuenta." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="progress"></div>
+
+  <!-- 1. Portada -->
+  <section class="screen" id="s-hero">
+    <p class="eyebrow reveal">Nosotros</p>
+    <h1 class="reveal d1" id="hero-time">Cargando…</h1>
+    <div class="bignum reveal d2" data-count id="hero-total">0</div>
+    <p class="bignum-label reveal d2">mensajes</p>
+    <p class="lead reveal d3">La historia que fuimos escribiendo sin darnos cuenta.</p>
+    <div class="scroll-hint">desliza ↓</div>
+  </section>
+
+  <!-- 2. Nos encontramos aquí -->
+  <section class="screen" id="s-start">
+    <p class="eyebrow reveal">Nos encontramos aquí</p>
+    <h2 class="reveal d1">Todo empezó con un mensaje</h2>
+    <div class="grid">
+      <div class="card reveal d1"><span class="n" id="first-date">—</span><span class="k">primer mensaje</span></div>
+      <div class="card reveal d2"><span class="n" id="last-date">—</span><span class="k">último mensaje</span></div>
+      <div class="card reveal d3"><span class="n" data-count id="days-talking">0</span><span class="k">días compartidos</span></div>
+    </div>
+  </section>
+
+  <!-- 3. Nos escribimos -->
+  <section class="screen" id="s-versus">
+    <p class="eyebrow reveal">Nos escribimos</p>
+    <h2 class="reveal d1">¿Quién habla más?</h2>
+    <div class="versus reveal d1">
+      <div class="vrow">
+        <div class="vlabel"><span class="vname" style="color:var(--gonza)">Gonzalo</span><span id="g-msgs">—</span></div>
+        <div class="bar gonza"><span id="g-bar"></span></div>
+      </div>
+      <div class="vrow">
+        <div class="vlabel"><span class="vname" style="color:var(--anita)">Ana Maria</span><span id="a-msgs">—</span></div>
+        <div class="bar anita"><span id="a-bar"></span></div>
+      </div>
+    </div>
+    <p class="sub reveal d2" id="versus-note">—</p>
+  </section>
+
+  <!-- 4. Siempre aparecías -->
+  <section class="screen" id="s-streak">
+    <p class="eyebrow reveal">Siempre aparecías</p>
+    <div class="bignum reveal d1" data-count id="streak-days">0</div>
+    <p class="bignum-label reveal d1">días seguidos hablando</p>
+    <p class="lead reveal d2" id="streak-range">—</p>
+    <div class="heat reveal d2" id="hour-heat" title="Actividad por hora del día"></div>
+    <div class="heat-axis reveal d2"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>23h</span></div>
+    <p class="sub reveal d3" id="rhythm-note">—</p>
+  </section>
+
+  <!-- 5. Te amo -->
+  <section class="screen" id="s-love">
+    <p class="eyebrow reveal">Lo que más repetimos</p>
+    <h2 class="reveal d1">“Te amo”</h2>
+    <div class="bignum reveal d1" data-count id="teamo-count">0</div>
+    <p class="bignum-label reveal d1">veces</p>
+    <div class="grid">
+      <div class="card reveal d1"><span class="n" data-count id="amor-count">0</span><span class="k">veces dijimos “amor”</span></div>
+      <div class="card reveal d2"><span class="n" data-count id="tequiero-count">0</span><span class="k">veces “te quiero”</span></div>
+      <div class="card reveal d3"><span class="n" id="hearts-count">0</span><span class="k">emojis de cariño</span></div>
+    </div>
+    <p class="sub reveal d3" id="love-note">—</p>
+  </section>
+
+  <!-- 6. Nuestro idioma: Chini -->
+  <section class="screen" id="s-chini">
+    <p class="eyebrow reveal">Nuestro idioma</p>
+    <div class="chini-word reveal d1">chini</div>
+    <p class="lead reveal d2" id="chini-note">—</p>
+    <div class="grid">
+      <div class="card reveal d1"><span class="n" data-count id="chini-total">0</span><span class="k">veces “chini”</span></div>
+      <div class="card reveal d2"><span class="n" data-count id="laughs-total">0</span><span class="k">mensajes con risa</span></div>
+      <div class="card reveal d3"><span class="n" id="laughs-who">—</span><span class="k">ríe más</span></div>
+    </div>
+  </section>
+
+  <!-- 7. Así sonábamos -->
+  <section class="screen" id="s-media">
+    <p class="eyebrow reveal">Así sonábamos, así nos veíamos</p>
+    <h2 class="reveal d1">Más que palabras</h2>
+    <div class="grid">
+      <div class="card reveal d1"><span class="n" data-count id="m-images">0</span><span class="k">fotos</span></div>
+      <div class="card reveal d2"><span class="n" data-count id="m-audios">0</span><span class="k">audios</span></div>
+      <div class="card reveal d3"><span class="n" data-count id="m-stickers">0</span><span class="k">stickers</span></div>
+      <div class="card reveal d3"><span class="n" data-count id="m-videos">0</span><span class="k">videos</span></div>
+    </div>
+  </section>
+
+  <!-- 8. Nuestra historia (timeline) -->
+  <section class="screen" id="s-timeline">
+    <p class="eyebrow reveal">Nuestra historia</p>
+    <h2 class="reveal d1">Mensajes, año a año</h2>
+    <div class="chart-wrap reveal d1"><canvas id="yearChart" height="170"></canvas></div>
+  </section>
+
+  <!-- 9. Capítulos editables -->
+  <section class="screen" id="s-chapters">
+    <p class="eyebrow reveal">Todo lo que vino después</p>
+    <h2 class="reveal d1">Nuestros capítulos</h2>
+    <div class="chapters" id="chapters"></div>
+  </section>
+
+  <!-- Insights -->
+  <section class="screen" id="s-insights">
+    <p class="eyebrow reveal">Pequeños descubrimientos</p>
+    <h2 class="reveal d1">Cosas que dicen los datos</h2>
+    <ul class="insights reveal d1" id="insights"></ul>
+  </section>
+
+  <!-- Final -->
+  <section class="screen closing" id="s-closing">
+    <h2 class="reveal" id="closing-title">Este chat no cuenta todo.</h2>
+    <p class="lead reveal d1" id="closing-sub">Pero guarda mucho.</p>
+    <p class="signature reveal d2" id="closing-sig">Gonzalo ❤️ Anita</p>
+    <p class="datestamp reveal d3" id="closing-date">—</p>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

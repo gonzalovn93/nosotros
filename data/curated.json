@@ -1,0 +1,20 @@
+{
+  "_comment": "Contenido editable a mano. El parser NUNCA toca este archivo. Edita libremente.",
+  "chapters": [
+    { "year": "2018", "emoji": "💬", "title": "Nos conocimos", "text": "El primer mensaje. Sin saber que empezaba todo." },
+    { "year": "2019", "emoji": "✈️", "title": "Distancia", "text": "Kilómetros de por medio, pero hablábamos todos los días." },
+    { "year": "2021", "emoji": "🏠", "title": "Construyendo", "text": "Planes, casa, futuro. Las conversaciones cambiaron de tono." },
+    { "year": "2024", "emoji": "🎓", "title": "Berkeley", "text": "Una nueva ciudad, una nueva etapa, juntos." },
+    { "year": "2025", "emoji": "💍", "title": "Matrimonio civil", "text": "Hicimos oficial lo que el chat ya sabía hace años." },
+    { "year": "2026", "emoji": "💒", "title": "La boda", "text": "Y todo lo que viene después." }
+  ],
+  "favorite_moments": [],
+  "quotes": [
+    { "text": "te extraño mucho", "by": "Ana Maria", "when": "2026-06-21" }
+  ],
+  "closing": {
+    "title": "Este chat no cuenta todo.",
+    "subtitle": "Pero guarda mucho.",
+    "signature": "Gonzalo ❤️ Anita"
+  }
+}

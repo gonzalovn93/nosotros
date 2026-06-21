@@ -1,0 +1,25 @@
+# NUNCA subir el chat crudo ni nada que contenga texto íntimo
+_chat.txt
+*.zip
+raw_data/
+exports/
+private/
+chat/
+*.txt
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (si luego usamos Vite)
+node_modules/
+dist/
+.cache/
