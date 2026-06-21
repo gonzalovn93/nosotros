@@ -78,7 +78,7 @@ async function main() {
   const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
 
   // 1. Hero
-  setText("hero-time", diffYM(g.first_message, g.last_message) + " y contando");
+  setText("hero-time", diffYM(g.first_message, g.last_message) + " y contando.");
   setTarget("hero-total", g.total_messages);
 
   // 2. Inicio
