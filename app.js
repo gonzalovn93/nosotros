@@ -80,6 +80,13 @@ async function main() {
   // 1. Hero
   setText("hero-time", diffYM(g.first_message, g.last_message) + " y contando.");
   setTarget("hero-total", g.total_messages);
+  // tiempo estimado escribiéndonos: palabras / velocidad de tipeo en celular (~30 ppm)
+  const WPM = 30;
+  const horas = g.total_words / WPM / 60;
+  const dias = horas / 24;
+  setText("hero-timespent",
+    `Solo escribiendo, son unas ${fmtInt(Math.round(horas / 10) * 10)} horas juntos: ` +
+    `más de ${Math.round(dias)} días sin parar de teclear.`);
 
   // 2. Inicio
   setText("first-date", fmtFecha(g.first_message));
