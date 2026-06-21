@@ -57,20 +57,6 @@
     <p class="sub reveal d2" id="versus-note">—</p>
   </section>
 
-  <!-- 4. Nuestro ritmo -->
-  <section class="screen" id="s-rhythm">
-    <p class="eyebrow reveal">Nuestro ritmo</p>
-    <h2 class="reveal d1">Cuándo y cómo hablamos</h2>
-    <div class="grid grid-4">
-      <div class="card reveal d1"><span class="n" id="fav-day">—</span><span class="k">nuestro día favorito</span></div>
-      <div class="card reveal d2"><span class="n" id="fav-hour">—</span><span class="k">hora pico</span></div>
-      <div class="card reveal d2"><span class="n" id="who-starts">—</span><span class="k">inicia más el día</span></div>
-      <div class="card reveal d3"><span class="n" id="who-fast">—</span><span class="k">responde más rápido</span></div>
-    </div>
-    <div class="heat reveal d3" id="hour-heat" title="Actividad por hora del día"></div>
-    <div class="heat-axis reveal d3"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>23h</span></div>
-  </section>
-
   <!-- 5. Te amo -->
   <section class="screen" id="s-love">
     <p class="eyebrow reveal">Lo que más repetimos</p>
@@ -91,14 +77,28 @@
     <div class="chini-word reveal d1">chini</div>
     <p class="lead reveal d2" id="chini-note">—</p>
 
-    <h3 class="block-title reveal d2">Las palabras que más repetimos</h3>
-    <table class="rank reveal d2" id="word-rank">
+    <h3 class="block-title reveal d2">De lo que más hablamos</h3>
+    <div class="pills reveal d2" id="topic-pills"></div>
+
+    <h3 class="block-title reveal d3">Las palabras que más repetimos</h3>
+    <table class="rank reveal d3" id="word-rank">
       <thead><tr><th></th><th>palabra</th><th>veces</th><th>la dice más</th></tr></thead>
       <tbody></tbody>
     </table>
+  </section>
 
-    <h3 class="block-title reveal d3">De lo que más hablamos</h3>
-    <div class="pills reveal d3" id="topic-pills"></div>
+  <!-- Nuestro ritmo (debajo de Chini) -->
+  <section class="screen" id="s-rhythm">
+    <p class="eyebrow reveal">Nuestro ritmo</p>
+    <h2 class="reveal d1">Cuándo y cómo hablamos</h2>
+    <div class="grid grid-4">
+      <div class="card reveal d1"><span class="n" id="fav-day">—</span><span class="k">nuestro día favorito</span></div>
+      <div class="card reveal d2"><span class="n" id="fav-hour">—</span><span class="k">hora pico</span></div>
+      <div class="card reveal d2"><span class="n" id="who-starts">—</span><span class="k">inicia más el día</span></div>
+      <div class="card reveal d3"><span class="n" id="who-fast">—</span><span class="k">responde más rápido</span></div>
+    </div>
+    <div class="heat reveal d3" id="hour-heat" title="Actividad por hora del día"></div>
+    <div class="heat-axis reveal d3"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>23h</span></div>
   </section>
 
   <!-- 7. Así sonábamos -->
