@@ -80,18 +80,17 @@ async function main() {
   // 1. Hero
   setText("hero-time", diffYM(g.first_message, g.last_message) + " y contando.");
   setTarget("hero-total", g.total_messages);
-  // tiempo estimado escribiéndonos: palabras / velocidad de tipeo en celular (~30 ppm)
-  const WPM = 30;
-  const horas = g.total_words / WPM / 60;
-  const dias = horas / 24;
-  setText("hero-timespent",
-    `Solo escribiendo, son unas ${fmtInt(Math.round(horas / 10) * 10)} horas juntos: ` +
-    `más de ${Math.round(dias)} días sin parar de teclear.`);
 
   // 2. Inicio
   setText("first-date", fmtFecha(g.first_message));
-  setText("last-date", fmtFecha(g.last_message));
   setTarget("days-talking", g.days_talking);
+  setTarget("start-total", g.total_messages);
+  // tiempo estimado escribiéndonos: palabras / velocidad de tipeo en celular (~30 ppm)
+  const WPM = 30;
+  const horas = Math.round(g.total_words / WPM / 60 / 10) * 10;
+  const dias = Math.round(g.total_words / WPM / 60 / 24);
+  setText("timespent-num", `≈ ${fmtInt(horas)} horas`);
+  setText("timespent-txt", `solo escribiéndonos: más de ${dias} días sin parar de teclear`);
 
   // 3. Versus
   const gm = g.per_person["Gonzalo"], am = g.per_person["Ana Maria"];
@@ -110,9 +109,12 @@ async function main() {
   setText("versus-note",
     `Entre los dos, ${fmtInt(g.total_messages)} mensajes. Ana Maria escribe más largo (${am.avg_words_per_msg} palabras por mensaje vs ${gm.avg_words_per_msg}).`);
 
-  // 4. Racha + heatmap horas
-  setTarget("streak-days", g.longest_streak_days);
-  setText("streak-range", `Del ${g.longest_streak_range[0]} al ${g.longest_streak_range[1]}, sin fallar un solo día.`);
+  // 4. Racha ACTIVA + heatmap horas
+  setTarget("streak-days", g.active_streak_days);
+  const pct = Math.round(100 * g.days_talking / g.calendar_span_days);
+  setText("streak-range",
+    `Seguimos sin fallar desde el ${fmtFecha(g.active_streak_since)}. ` +
+    `Y en estos ocho años hablamos ${fmtInt(g.days_talking)} de ${fmtInt(g.calendar_span_days)} días: el ${pct}% del tiempo.`);
   buildHeat(g.activity.by_hour_total);
   const weekdays = ["lunes","martes","miércoles","jueves","viernes","sábado","domingo"];
   const favDay = Object.entries(g.activity.by_weekday_total).sort((a,b)=>b[1]-a[1])[0][0];
@@ -145,9 +147,6 @@ async function main() {
   setTarget("m-audios", mt.audio || 0);
   setTarget("m-stickers", mt.sticker || 0);
   setTarget("m-videos", mt.video || 0);
-
-  // 8. Timeline por año
-  buildYearChart(g.rhythm.by_year);
 
   // 9. Capítulos
   buildChapters(curated.chapters || []);
@@ -183,32 +182,6 @@ function buildHeat(byHour) {
     cell.title = `${h}:00 — ${fmtInt(v)} mensajes`;
     wrap.appendChild(cell);
   }
-}
-
-function buildYearChart(byYear) {
-  const labels = Object.keys(byYear);
-  const data = Object.values(byYear);
-  const ctx = document.getElementById("yearChart");
-  const grad = ctx.getContext("2d").createLinearGradient(0, 0, 0, 220);
-  grad.addColorStop(0, "rgba(212,113,92,0.55)");
-  grad.addColorStop(1, "rgba(212,113,92,0.02)");
-  new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets: [{
-      data, fill: true, backgroundColor: grad,
-      borderColor: "#d4715c", borderWidth: 2.5, tension: 0.4,
-      pointBackgroundColor: "#c9a25e", pointRadius: 4, pointHoverRadius: 6,
-    }] },
-    options: {
-      responsive: true, maintainAspectRatio: true,
-      plugins: { legend: { display: false },
-        tooltip: { callbacks: { label: (c) => `${fmtInt(c.parsed.y)} mensajes` } } },
-      scales: {
-        x: { grid: { display: false }, ticks: { color: "#6b605a" } },
-        y: { grid: { color: "rgba(107,96,90,0.08)" }, ticks: { color: "#6b605a", callback: (v) => fmtInt(v) } },
-      },
-    },
-  });
 }
 
 function buildChapters(chapters) {

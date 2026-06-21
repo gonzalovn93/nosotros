@@ -15,11 +15,12 @@
 
   <!-- 1. Portada -->
   <section class="screen" id="s-hero">
-    <h1 class="reveal">Ocho años<br>conversando</h1>
-    <div class="bignum reveal d1" data-count id="hero-total">0</div>
-    <p class="bignum-label reveal d1">mensajes</p>
-    <p class="lead reveal d2" id="hero-time">Cargando…</p>
-    <p class="note reveal d3" id="hero-timespent">&nbsp;</p>
+    <img class="hero-photo reveal" src="assets/gonza-anita.jpg" alt="Anita y Gonza" />
+    <p class="names reveal d1">Anita y Gonza</p>
+    <h1 class="reveal d1">Ocho años<br>conversando</h1>
+    <div class="bignum reveal d2" data-count id="hero-total">0</div>
+    <p class="bignum-label reveal d2">mensajes</p>
+    <p class="lead reveal d3" id="hero-time">Cargando…</p>
     <div class="scroll-hint">desliza ↓</div>
   </section>
 
@@ -29,8 +30,9 @@
     <h2 class="reveal d1">Todo empezó con un mensaje</h2>
     <div class="grid">
       <div class="card reveal d1"><span class="n" id="first-date">—</span><span class="k">primer mensaje</span></div>
-      <div class="card reveal d2"><span class="n" id="last-date">—</span><span class="k">último mensaje</span></div>
-      <div class="card reveal d3"><span class="n" data-count id="days-talking">0</span><span class="k">días compartidos</span></div>
+      <div class="card reveal d2"><span class="n" data-count id="days-talking">0</span><span class="k">días compartidos</span></div>
+      <div class="card reveal d3"><span class="n" data-count id="start-total">0</span><span class="k">mensajes entre los dos</span></div>
+      <div class="card card-wide reveal d3"><span class="n" id="timespent-num">—</span><span class="k" id="timespent-txt">—</span></div>
     </div>
   </section>
 
@@ -100,13 +102,6 @@
     </div>
   </section>
 
-  <!-- 8. Nuestra historia (timeline) -->
-  <section class="screen" id="s-timeline">
-    <p class="eyebrow reveal">Nuestra historia</p>
-    <h2 class="reveal d1">Mensajes, año a año</h2>
-    <div class="chart-wrap reveal d1"><canvas id="yearChart" height="170"></canvas></div>
-  </section>
-
   <!-- 9. Capítulos editables -->
   <section class="screen" id="s-chapters">
     <p class="eyebrow reveal">Todo lo que vino después</p>
@@ -129,7 +124,6 @@
     <p class="datestamp reveal d3" id="closing-date">—</p>
   </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -27,6 +27,8 @@
       "2019-04-14",
       "2020-01-10"
     ],
+    "active_streak_days": 16,
+    "active_streak_since": "2026-06-06",
     "longest_gap_days": 316,
     "longest_gap_range": [
       "2022-06-11",

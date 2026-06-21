@@ -340,6 +340,15 @@ def main():
                 longest_gap = gap - 1
                 gap_from, gap_to = days_sorted[i - 1], days_sorted[i]
 
+    # racha ACTIVA: dias consecutivos hablando hasta el ultimo dia (hoy)
+    active_streak = 1
+    for i in range(len(days_sorted) - 1, 0, -1):
+        if (days_sorted[i] - days_sorted[i - 1]).days == 1:
+            active_streak += 1
+        else:
+            break
+    active_since = days_sorted[len(days_sorted) - active_streak]
+
     # dias totales sin hablar (en el rango)
     total_span_days = (days_sorted[-1] - days_sorted[0]).days + 1
     days_silent = total_span_days - len(days_sorted)
@@ -403,6 +412,8 @@ def main():
             },
             "longest_streak_days": longest_streak,
             "longest_streak_range": [str(best_start), str(best_end)],
+            "active_streak_days": active_streak,
+            "active_streak_since": str(active_since),
             "longest_gap_days": longest_gap,
             "longest_gap_range": [str(gap_from), str(gap_to)] if gap_from else None,
             "busiest_day": {"date": str(top_days[0][0]), "messages": top_days[0][1]},
