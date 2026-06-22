@@ -234,7 +234,7 @@ function buildInsights(list) {
   const ul = document.getElementById("insights");
   list.forEach((t) => {
     const li = document.createElement("li");
-    li.textContent = t;
+    li.textContent = t.replace(/Gonzalo/g, "Gonza");
     ul.appendChild(li);
   });
 }

@@ -62,6 +62,7 @@ EMOJI_NAMES = {
 LOVE_TERMS = {
     "te amo": r"te amo",
     "te quiero": r"te quiero",
+    "te extraño": r"te extra[nñ]o",
     "amor": r"\bamor\b",
     "mi amor": r"mi amor",
     "bebe": r"\bbeb[eé]\b",
