@@ -194,13 +194,15 @@ function buildWordRank(chini, love) {
   rows.sort((a, b) => b.total - a.total);
   const tb = document.querySelector("#word-rank tbody");
   rows.slice(0, 8).forEach((r, i) => {
+    // en empate, mostramos a Anita (suele ser la que lo empieza)
+    const who = r.g === r.a ? "Ana Maria" : r.who;
     const tr = document.createElement("tr");
     tr.innerHTML =
       `<td class="rk">${i + 1}</td><td class="rw">“${r.w}”</td>` +
       `<td>${fmtInt(r.total)}</td>` +
       `<td class="th-g">${fmtInt(r.g)}</td>` +
       `<td class="th-a">${fmtInt(r.a)}</td>` +
-      `<td class="${r.who === "Ana Maria" ? "th-a" : "th-g"}">${SHORT(r.who)}</td>`;
+      `<td class="${who === "Ana Maria" ? "th-a" : "th-g"}">${SHORT(who)}</td>`;
     tb.appendChild(tr);
   });
 }
