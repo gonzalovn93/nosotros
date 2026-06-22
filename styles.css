@@ -154,17 +154,19 @@ h2 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 0.6rem; }
 
 /* ranking de palabras */
 .rank {
-  width: 100%; max-width: 540px; margin-top: 0.8rem; border-collapse: collapse;
+  width: 100%; max-width: 620px; margin-top: 0.8rem; border-collapse: collapse;
   background: rgba(255,255,255,0.7); border: 1px solid var(--rose-soft);
-  border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.98rem;
+  border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); font-size: 0.95rem;
 }
-.rank th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-soft); font-weight: 600; padding: 0.7rem 0.9rem; text-align: left; border-bottom: 1px solid var(--rose-soft); }
-.rank td { padding: 0.7rem 0.9rem; text-align: left; }
+.rank th { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-soft); font-weight: 600; padding: 0.7rem 0.8rem; text-align: left; border-bottom: 1px solid var(--rose-soft); }
+.rank td { padding: 0.7rem 0.8rem; text-align: left; }
 .rank tbody tr + tr td { border-top: 1px solid var(--rose-soft); }
-.rank .rk { color: var(--gold); font-weight: 700; width: 1.5rem; }
+.rank .rk { color: var(--gold); font-weight: 700; width: 1.4rem; }
 .rank .rw { font-family: var(--font-serif); font-style: italic; }
-.rank th:nth-child(3), .rank td:nth-child(3) { text-align: right; font-family: var(--font-serif); font-weight: 600; }
-.rank th:last-child, .rank td:last-child { text-align: right; font-weight: 600; }
+/* columnas numéricas (veces, Gonza, Anita) + última (la dice más) a la derecha */
+.rank th:nth-child(n+3), .rank td:nth-child(n+3) { text-align: right; }
+.rank td:nth-child(3), .rank td:nth-child(4), .rank td:nth-child(5) { font-family: var(--font-serif); font-weight: 600; }
+.rank td:last-child { font-weight: 600; }
 
 /* pills de temas */
 .pills { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; max-width: 620px; margin-top: 0.8rem; }
@@ -242,6 +244,8 @@ h2 { font-size: clamp(2rem, 5vw, 3.4rem); margin-bottom: 0.6rem; }
   .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .vtable { font-size: 0.9rem; }
   .vtable th, .vtable td { padding: 0.7rem 0.7rem; }
+  .rank { font-size: 0.82rem; }
+  .rank th, .rank td { padding: 0.55rem 0.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; opacity: 1; transform: none; }

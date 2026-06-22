@@ -188,14 +188,19 @@ function buildHeat(byHour) {
 const SHORT = (n) => (n === "Ana Maria" ? "Anita" : "Gonza");
 
 function buildWordRank(chini, love) {
-  const rows = [{ w: "chini", total: chini.total, who: chini.who_more }];
-  Object.entries(love).forEach(([k, v]) => rows.push({ w: k, total: v.total, who: v.who_more }));
+  const rows = [{ w: "chini", total: chini.total, g: chini["Gonzalo"], a: chini["Ana Maria"], who: chini.who_more }];
+  Object.entries(love).forEach(([k, v]) =>
+    rows.push({ w: k, total: v.total, g: v["Gonzalo"], a: v["Ana Maria"], who: v.who_more }));
   rows.sort((a, b) => b.total - a.total);
   const tb = document.querySelector("#word-rank tbody");
   rows.slice(0, 8).forEach((r, i) => {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td class="rk">${i + 1}</td><td class="rw">“${r.w}”</td>` +
-      `<td>${fmtInt(r.total)}</td><td class="${r.who === "Ana Maria" ? "th-a" : "th-g"}">${SHORT(r.who)}</td>`;
+    tr.innerHTML =
+      `<td class="rk">${i + 1}</td><td class="rw">“${r.w}”</td>` +
+      `<td>${fmtInt(r.total)}</td>` +
+      `<td class="th-g">${fmtInt(r.g)}</td>` +
+      `<td class="th-a">${fmtInt(r.a)}</td>` +
+      `<td class="${r.who === "Ana Maria" ? "th-a" : "th-g"}">${SHORT(r.who)}</td>`;
     tb.appendChild(tr);
   });
 }
